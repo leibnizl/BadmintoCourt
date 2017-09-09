@@ -1,5 +1,8 @@
 package util;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 /**
  * Created by yb on 2017/9/9 0009.
  */
@@ -28,6 +31,33 @@ public class Utils {
         }
     }
 
+
+    public static int parseHour(String time) {
+        String[] timeArray = time.split(":");
+        if (timeArray.length != 2) return -1;
+        if (Integer.parseInt(timeArray[1]) != 0) return -1;
+        return Integer.parseInt(timeArray[0]);
+    }
+
+    public static LocalDate parseLocalDate(String date) {
+        LocalDate localDate = null;
+        String[] dateArr = date.split("-");
+        if (dateArr.length != 3) {
+            return null;
+        }
+        try {
+            int year = Integer.parseInt(dateArr[0]);
+            int month = Integer.parseInt(dateArr[1]);
+            int day = Integer.parseInt(dateArr[2]);
+            Month month1 = new Month.of(month);
+            localDate = new LocalDate(year, month, day);
+        } catch (Exception e) {
+            localDate = null;
+        } finally {
+            return localDate;
+        }
+
+    }
 
 
 }

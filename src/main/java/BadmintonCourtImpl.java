@@ -18,15 +18,16 @@ public class BadmintonCourtImpl implements BadmintonCourtInterface {
             String[] timeSplit = bookStr[2].split("~");
             if (timeSplit.length != 2) {
                 System.out.println(invCmd);
-//                return;
-            } else {
-                if (Utils.isClockSharp(timeSplit[0]) && Utils.isClockSharp(timeSplit[1])) {
-                    int start = Integer.parseInt(timeSplit[0].split(":")[0]);
-                    int end = Integer.parseInt(timeSplit[0].split(":")[0]);
-                    LocalDate localDate = new LocalDate(bookStr[1])
-                    Order order = new Order(bookStr[0], )
-                }
+                return;
             }
+            int start = Utils.parseHour(timeSplit[0]);
+            int end = Utils.parseHour(timeSplit[1]);
+            if (start < 0 || end < 0) {
+                System.out.println("Time Invalid");
+                return;
+            }
+            LocalDate localDate = Utils.parseLocalDate(bookStr[1]);
+
         } else if (bookStr.length == 5) {
             if ("C".equals(bookStr[4])) {
 
