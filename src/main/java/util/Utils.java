@@ -3,6 +3,8 @@ package util;
 import java.time.LocalDate;
 import java.time.Month;
 
+
+
 /**
  * Created by yb on 2017/9/9 0009.
  */
@@ -49,8 +51,9 @@ public class Utils {
             int year = Integer.parseInt(dateArr[0]);
             int month = Integer.parseInt(dateArr[1]);
             int day = Integer.parseInt(dateArr[2]);
-            Month month1 = new Month.of(month);
-            localDate = new LocalDate(year, month, day);
+            Month month1 = Month.of(month);
+
+            localDate = LocalDate.of(year, month1, day);
         } catch (Exception e) {
             localDate = null;
         } finally {

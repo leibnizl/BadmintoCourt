@@ -1,27 +1,54 @@
+import util.Utils;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Created by yb on 2017/9/9 0009.
  */
 public class Order implements CalculatePrice, Comparable<Order> {
     private String user;
-//    private Instant instant;
+
     private LocalDate localDate;
     private int start;
     private int end;
-    private String court;
+    private Court court;
 
     private double price;
     private boolean isCalculated;
     private boolean isCanceled;
 
-//    public Order NewOrder(String orderString) {
-//        String[] orderStrs = orderString.split(" ");
-//        if ()
-//    }
+    static String invCmd = "Invalid Command!";
 
-    public Order(String user, LocalDate localDate, int start, int end, String court) {
+    public static Order NewOrder(String[] orderString) {
+        String[] timeSplit = orderString[2].split("~");
+        if (timeSplit.length != 2) {
+            System.out.println(invCmd);
+            return null;
+        }
+        int start = Utils.parseHour(timeSplit[0]);
+        int end = Utils.parseHour(timeSplit[1]);
+        if (start < 0 || end < 0) {
+            System.out.println("Time Invalid");
+            return null;
+        }
+        LocalDate localDate = Utils.parseLocalDate(orderString[1]);
+        if (null == localDate) {
+            System.out.println("Date Invalid");
+            return null;
+        }
+        Court court = Court.getCourt(orderString[2]);
+        if (null == court) {
+            System.out.println("Court Invalid");
+            return null;
+        }
+
+        return new Order(orderString[0], localDate, start, end, court);
+
+    }
+
+    public Order(String user, LocalDate localDate, int start, int end, Court court) {
         this.user = user;
         this.localDate = localDate;
         this.start = start;
@@ -100,7 +127,7 @@ public class Order implements CalculatePrice, Comparable<Order> {
             return localDate.getYear() - order.getLocalDate().getYear();
         }
         if (localDate.getMonth() != order.getLocalDate().getMonth()) {
-            return localDate.getMonth() - order.getLocalDate().getMonth();
+            return localDate.getMonthValue() - order.getLocalDate().getMonthValue();
         }
        return start - order.getStart();
     }
@@ -137,11 +164,11 @@ public class Order implements CalculatePrice, Comparable<Order> {
         this.end = end;
     }
 
-    public String getCourt() {
+    public Court getCourt() {
         return court;
     }
 
-    public void setCourt(String court) {
+    public void setCourt(Court court) {
         this.court = court;
     }
 
