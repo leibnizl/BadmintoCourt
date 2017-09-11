@@ -33,17 +33,23 @@ public class Order implements Comparable<Order> {
         int start = Utils.parseHour(timeSplit[0]);
         int end = Utils.parseHour(timeSplit[1]);
         if (start < 0 || end < 0 || start >= end) {
-            System.out.println("> Error: the time of the booking is invalid");
+//            System.out.println("> Error: the time of the booking is invalid");
+            System.out.println(Utils.errorMsg);
             return null;
+
         }
         LocalDate localDate = Utils.parseLocalDate(orderString[1]);
         if (null == localDate) {
-            System.out.println("> Error: the date of the booking is invalid");
+//            System.out.println("> Error: the date of the booking is invalid");
+            System.out.println(Utils.errorMsg);
+
             return null;
         }
 
         if (!badmintonCourt.isValidCourt(orderString[3])) {
-            System.out.println("> Error: the court of the booking is invalid");
+//            System.out.println("> Error: the court of the booking is invalid");
+            System.out.println(Utils.errorMsg);
+
             return null;
         }
 

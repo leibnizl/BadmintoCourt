@@ -10,18 +10,20 @@ import java.time.Month;
  */
 public class Utils {
 
-    public static final String errorMsg = "Error: the booking is invalid!";
-    public static final String successMsg = "Success: the booking is accepted!";
+    public static final String errorMsg = "> Error: the booking is invalid!";
+    public static final String successMsg = "> Success: the booking is accepted!";
 
     public static boolean isClockSharp0(String hourStr, String minuteStr) {
         int hour = Integer.parseInt(hourStr);
         if (hour > 24 || hour < 0) {
-            System.out.println("Time Invalid");
+//            System.out.println("> Error: the time of booking is invalid");
+            System.out.println(errorMsg);
             return false;
         }
         int minute = Integer.parseInt(minuteStr);
         if (minute != 0) {
-            System.out.println("Time Invalid");
+//            System.out.println("> Error: the time of booking is invalid");
+            System.out.println(errorMsg);
             return false;
         } else {
             return true;
@@ -30,7 +32,8 @@ public class Utils {
     public static boolean isClockSharp(String time) {
         String[] tmp = time.split(":");
         if (tmp.length != 2) {
-            System.out.println("Time Invalid");
+//            System.out.println("> Error: the time of booking is invalid");
+            System.out.println(errorMsg);
             return false;
         } else {
             return isClockSharp0(tmp[0], tmp[1]);
