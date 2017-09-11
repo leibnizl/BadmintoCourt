@@ -2,7 +2,11 @@
  * Created by yb on 2017/9/9 0009.
  */
 public interface BadmintonCourt {
-    void book(Order order);
+    boolean book(Order order);
 
-    void cancelBook(Order order);
+    boolean cancelBook(Order order);
+
+    boolean isValidCourt(String name);
+
+    void printSum();
 }

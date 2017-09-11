@@ -9,6 +9,10 @@ import java.time.Month;
  * Created by yb on 2017/9/9 0009.
  */
 public class Utils {
+
+    public static final String errorMsg = "Error: the booking is invalid!";
+    public static final String successMsg = "Success: the booking is accepted!";
+
     public static boolean isClockSharp0(String hourStr, String minuteStr) {
         int hour = Integer.parseInt(hourStr);
         if (hour > 24 || hour < 0) {
@@ -24,7 +28,7 @@ public class Utils {
         }
     }
     public static boolean isClockSharp(String time) {
-        String[] tmp = time.split("");
+        String[] tmp = time.split(":");
         if (tmp.length != 2) {
             System.out.println("Time Invalid");
             return false;

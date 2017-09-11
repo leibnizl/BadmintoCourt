@@ -6,24 +6,19 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         BadmintonCourt badmintonCourt = new BadmintonCourtImpl();
-        while (scanner.hasNext()) {
+        while (true) {
             String command = scanner.nextLine();
-            if ("\n".equals(command)) {
+            if (command.length() == 0) {
                 badmintonCourt.printSum();
-                continue;
+                break;
             }
             String[] cmdArr = command.split(" ");
             if (cmdArr.length < 4 || cmdArr.length > 5) {
-                System.out.println("Invalid Command!");
+                System.out.println(Utils.errorMsg);
                 continue;
             }
 
-//            boolean argsValid = badmintonCourt.checkArgs(cmdArr);
-//            if (!argsValid) continue;
-//            int start = Utils.parseHour
-//
-
-            Order order = Order.NewOrder(cmdArr);
+            Order order = Order.NewOrder(cmdArr, badmintonCourt);
             if (null == order) continue;
             if (cmdArr.length == 4) {
                 badmintonCourt.book(order);
